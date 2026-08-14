@@ -40,6 +40,28 @@ taskman --file ./tasks.json overdue
 `--file` を省略すると `~/.taskman.json` を使います。
 インストールせずに実行する場合は `PYTHONPATH=src python3 -m taskman.cli ...`。
 
+## Devinのセッション（VM）で実行する場合
+
+Blueprint（環境設定）で `.venv` の作成とPATH設定、`pip install -e ".[dev]"` まで済んでいるため、
+セッション開始時点でそのまま実行できます。
+
+```bash
+cd ~/repos/devin-practice
+pytest -q                # テスト
+ruff check .             # Lint
+taskman --file ./tasks.json add "動作確認" --priority 1
+taskman --file ./tasks.json list
+```
+
+`taskman` が見つからない場合は明示的にvenvを指定してください。
+
+```bash
+.venv/bin/pytest -q
+.venv/bin/taskman --help
+# venvが無い場合の再作成
+python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
+```
+
 ## テスト / Lint
 
 ```bash
