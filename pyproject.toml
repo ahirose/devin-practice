@@ -1,0 +1,30 @@
+[project]
+name = "taskman"
+version = "0.1.0"
+description = "Devin学習用の練習プロジェクト（タスク管理CLI）"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "ruff>=0.4"]
+
+[project.scripts]
+taskman = "taskman.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
